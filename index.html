@@ -104,6 +104,9 @@
     <ion-content id="container" class="ion-padding-top"></ion-content>
   </ion-app>
 
+  <!-- 用於背景無縫喚起 App 的隱藏 iframe -->
+  <iframe id="appLauncher" style="display:none; width:0; height:0; border:0;"></iframe>
+
   <script>
     const colorCodeMap = {
       '星光白色': '#f0f0ed',
@@ -198,17 +201,26 @@
 
     let lastClickTime = 0;
 
-    // 單一喚起 App，並防止 1 秒內重複點擊
+    // 使用 iframe 背景喚起 App，徹底解決 Safari 空白頁與地址無效彈窗
     function openApp(partNo) {
       const now = Date.now();
-      if (now - lastClickTime < 1000) return;
+      if (now - lastClickTime < 800) return; // 800ms 防重複連點
       lastClickTime = now;
 
       if (navigator.vibrate) {
         navigator.vibrate(50);
       }
 
-      window.location.href = `apple-store://product/${partNo}`;
+      const iframe = document.getElementById('appLauncher');
+      const targetUrl = `apple-store://product/${partNo}`;
+
+      // 先重置 src 避免 Safari 快取
+      iframe.src = 'about:blank';
+      
+      // 使用 iframe 開啟，Safari 主頁面不會跳轉，也不會留白
+      setTimeout(() => {
+        iframe.src = targetUrl;
+      }, 10);
     }
 
     // 複製 Part No. 邏輯
