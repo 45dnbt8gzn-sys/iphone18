@@ -19,32 +19,31 @@
   </ion-app>
 
   <script>
+    // 統一加上 Trade-In 與不加購 AppleCare+ 的參數
+    const param = '?step=tradein&applecare=false';
+
     const data = [
       {
         name: 'iPhone Duo',
         capacities: [
-          { capacity: '256GB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2D4ZA/A' }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2E4ZA/A' }] },
-          { capacity: '512GB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2F4ZA/A' }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2G4ZA/A' }] },
-          { capacity: '1TB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2H4ZA/A' }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2J4ZA/A' }] },
-          { capacity: '2TB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2K4ZA/A' }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2L4ZA/A' }] }
+          { capacity: '256GB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2D4ZA/A' + param }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2E4ZA/A' + param }] },
+          { capacity: '512GB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2F4ZA/A' + param }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2G4ZA/A' + param }] },
+          { capacity: '1TB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2H4ZA/A' + param }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2J4ZA/A' + param }] },
+          { capacity: '2TB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2K4ZA/A' + param }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2L4ZA/A' + param }] }
         ]
       },
       {
         name: 'iPhone 18 Pro',
         capacities: [
-          { capacity: '256GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXA4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXB4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXC4ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXD4ZA/A' }] },
-          { capacity: '512GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXE4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXF4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXG4ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXH4ZA/A' }] },
-          { capacity: '1TB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXJ4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXK4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXL4ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXM4ZA/A' }] },
-          { capacity: '2TB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXN4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXP4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXX1ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXX2ZA/A' }] }
+          { capacity: '256GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXA4ZA/A' + param }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXB4ZA/A' + param }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXC4ZA/A' + param }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXD4ZA/A' + param }] },
+          { capacity: '512GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXE4ZA/A' + param }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXF4ZA/A' + param }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXG4ZA/A' + param }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXH4ZA/A' + param }] }
         ]
       },
       {
         name: 'iPhone 18 Pro Max',
         capacities: [
-          { capacity: '256GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXQ4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXR4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXS4ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXT4ZA/A' }] },
-          { capacity: '512GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXU4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXV4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXW4ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXX4ZA/A' }] },
-          { capacity: '1TB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXY4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXZ4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJY04ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJY14ZA/A' }] },
-          { capacity: '2TB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJY24ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJY34ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJY44ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJY54ZA/A' }] }
+          { capacity: '256GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXQ4ZA/A' + param }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXR4ZA/A' + param }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXS4ZA/A' + param }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXT4ZA/A' + param }] },
+          { capacity: '512GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXU4ZA/A' + param }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXV4ZA/A' + param }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXW4ZA/A' + param }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXX4ZA/A' + param }] }
         ]
       }
     ];
