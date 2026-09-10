@@ -1,0 +1,174 @@
+<!-- tab1.page.html -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Apple 概念機型連結</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item-group *ngFor="let model of products">
+      <ion-item-divider color="light">
+        <ion-label>
+          <h2>{{ model.name }}</h2>
+        </ion-label>
+      </ion-item-divider>
+
+      <ng-container *ngFor="let capacityGroup of model.capacities">
+        <ion-list-header>
+          <ion-label>{{ capacityGroup.capacity }}</ion-label>
+        </ion-list-header>
+
+        <ion-item *ngFor="let item of capacityGroup.items" [href]="item.url" target="_blank" detail="true">
+          <ion-label>
+            <h3>{{ item.color }}</h3>
+            <p>{{ item.url }}</p>
+          </ion-label>
+          <ion-icon name="open-outline" slot="end"></ion-icon>
+        </ion-item>
+      </ng-container>
+    </ion-item-group>
+  </ion-list>
+</ion-content>
+// tab1.page.ts
+import { Component } from '@angular/core';
+
+interface ProductItem {
+  color: string;
+  url: string;
+}
+
+interface CapacityGroup {
+  capacity: string;
+  items: ProductItem[];
+}
+
+interface ProductModel {
+  name: string;
+  capacities: CapacityGroup[];
+}
+
+@Component({
+  selector: 'app-tab1',
+  templateUrl: 'tab1.page.html',
+  styleUrls: ['tab1.page.scss'],
+})
+export class Tab1Page {
+  products: ProductModel[] = [
+    {
+      name: 'iPhone Duo',
+      capacities: [
+        {
+          capacity: '256GB',
+          items: [
+            { color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2D4ZA/A' },
+            { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2E4ZA/A' }
+          ]
+        },
+        {
+          capacity: '512GB',
+          items: [
+            { color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2F4ZA/A' },
+            { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2G4ZA/A' }
+          ]
+        },
+        {
+          capacity: '1TB',
+          items: [
+            { color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2H4ZA/A' },
+            { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2J4ZA/A' }
+          ]
+        },
+        {
+          capacity: '2TB',
+          items: [
+            { color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2K4ZA/A' },
+            { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2L4ZA/A' }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'iPhone 18 Pro',
+      capacities: [
+        {
+          capacity: '256GB',
+          items: [
+            { color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXA4ZA/A' },
+            { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXB4ZA/A' },
+            { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXC4ZA/A' },
+            { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXD4ZA/A' }
+          ]
+        },
+        {
+          capacity: '512GB',
+          items: [
+            { color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXE4ZA/A' },
+            { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXF4ZA/A' },
+            { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXG4ZA/A' },
+            { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXH4ZA/A' }
+          ]
+        },
+        {
+          capacity: '1TB',
+          items: [
+            { color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXJ4ZA/A' },
+            { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXK4ZA/A' },
+            { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXL4ZA/A' },
+            { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXM4ZA/A' }
+          ]
+        },
+        {
+          capacity: '2TB',
+          items: [
+            { color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXN4ZA/A' },
+            { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXP4ZA/A' },
+            { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXX1ZA/A' },
+            { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXX2ZA/A' }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'iPhone 18 Pro Max',
+      capacities: [
+        {
+          capacity: '256GB',
+          items: [
+            { color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXQ4ZA/A' },
+            { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXR4ZA/A' },
+            { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXS4ZA/A' },
+            { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXT4ZA/A' }
+          ]
+        },
+        {
+          capacity: '512GB',
+          items: [
+            { color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXU4ZA/A' },
+            { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXV4ZA/A' },
+            { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXW4ZA/A' },
+            { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXX4ZA/A' }
+          ]
+        },
+        {
+          capacity: '1TB',
+          items: [
+            { color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXY4ZA/A' },
+            { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXZ4ZA/A' },
+            { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJY04ZA/A' },
+            { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJY14ZA/A' }
+          ]
+        },
+        {
+          capacity: '2TB',
+          items: [
+            { color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJY24ZA/A' },
+            { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJY34ZA/A' },
+            { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJY44ZA/A' },
+            { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJY54ZA/A' }
+          ]
+        }
+      ]
+    }
+  ];
+}
