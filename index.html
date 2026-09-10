@@ -2,71 +2,209 @@
 <html lang="zh-HK">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apple 概念機型連結</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Apple 概念機型</title>
   <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
   <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+  <style>
+    :root {
+      --ion-background-color: #f2f2f7;
+      --ion-font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    }
+    
+    ion-toolbar {
+      --background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+    }
+
+    ion-segment {
+      padding: 6px;
+      background: rgba(118, 118, 128, 0.12);
+      border-radius: 10px;
+    }
+
+    ion-segment-button {
+      --color-checked: #000;
+      --background-checked: #ffffff;
+      --border-radius: 7px;
+      font-weight: 600;
+      font-size: 13px;
+      min-height: 32px;
+    }
+
+    .model-header {
+      padding: 16px 20px 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .model-header h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #000;
+    }
+
+    .product-card {
+      margin: 0 16px 16px 16px;
+      border-radius: 16px;
+      background: #ffffff;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+
+    .capacity-title {
+      padding: 12px 16px 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #8e8e93;
+      text-transform: uppercase;
+      letter-spacing: -0.2px;
+    }
+
+    .color-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+      display: inline-block;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .item-row {
+      --padding-start: 16px;
+      --padding-end: 16px;
+      --inner-padding-end: 0;
+      --min-height: 52px;
+    }
+
+    .item-label {
+      font-size: 16px;
+      font-weight: 500;
+      color: #1c1c1e;
+    }
+
+    .action-btn {
+      font-size: 14px;
+      font-weight: 600;
+      color: #007aff;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  </style>
 </head>
 <body>
   <ion-app>
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Apple 概念機型連結</ion-title>
+    <ion-header class="ion-no-border">
+      <ion-toolbar color="light">
+        <ion-title>Apple 概念機型</ion-title>
+      </ion-toolbar>
+      <ion-toolbar color="light">
+        <ion-segment value="iPhone Duo" id="modelSegment">
+          <ion-segment-button value="iPhone Duo">
+            <ion-label>Duo</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="iPhone 18 Pro">
+            <ion-label>18 Pro</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="iPhone 18 Pro Max">
+            <ion-label>18 Pro Max</ion-label>
+          </ion-segment-button>
+        </ion-segment>
       </ion-toolbar>
     </ion-header>
-    <ion-content id="container"></ion-content>
+
+    <ion-content id="container" class="ion-padding-top"></ion-content>
   </ion-app>
 
   <script>
-    // 統一加上 Trade-In 與不加購 AppleCare+ 的參數
-    const param = '?step=tradein&applecare=false';
+    // 顏色與十六進位碼對應
+    const colorCodeMap = {
+      '星光白色': '#f0f0ed',
+      '夜空色': '#23262a',
+      '布根地紅色': '#58111A',
+      '冰川色': '#d8e3e8',
+      '黑色': '#2d2d2e',
+      '銀色': '#e2e3e5'
+    };
 
     const data = [
       {
         name: 'iPhone Duo',
         capacities: [
-          { capacity: '256GB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2D4ZA/A' + param }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2E4ZA/A' + param }] },
-          { capacity: '512GB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2F4ZA/A' + param }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2G4ZA/A' + param }] },
-          { capacity: '1TB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2H4ZA/A' + param }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2J4ZA/A' + param }] },
-          { capacity: '2TB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2K4ZA/A' + param }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2L4ZA/A' + param }] }
+          { capacity: '256GB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2D4ZA/A' }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2E4ZA/A' }] },
+          { capacity: '512GB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2F4ZA/A' }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2G4ZA/A' }] },
+          { capacity: '1TB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2H4ZA/A' }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2J4ZA/A' }] },
+          { capacity: '2TB', items: [{ color: '星光白色', url: 'https://www.apple.com/hk-zh/xc/product/MK2K4ZA/A' }, { color: '夜空色', url: 'https://www.apple.com/hk-zh/xc/product/MK2L4ZA/A' }] }
         ]
       },
       {
         name: 'iPhone 18 Pro',
         capacities: [
-          { capacity: '256GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXA4ZA/A' + param }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXB4ZA/A' + param }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXC4ZA/A' + param }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXD4ZA/A' + param }] },
-          { capacity: '512GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXE4ZA/A' + param }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXF4ZA/A' + param }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXG4ZA/A' + param }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXH4ZA/A' + param }] }
+          { capacity: '256GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXA4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXB4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXC4ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXD4ZA/A' }] },
+          { capacity: '512GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXE4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXF4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXG4ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXH4ZA/A' }] }
         ]
       },
       {
         name: 'iPhone 18 Pro Max',
         capacities: [
-          { capacity: '256GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXQ4ZA/A' + param }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXR4ZA/A' + param }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXS4ZA/A' + param }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXT4ZA/A' + param }] },
-          { capacity: '512GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXU4ZA/A' + param }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXV4ZA/A' + param }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXW4ZA/A' + param }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXX4ZA/A' + param }] }
+          { capacity: '256GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXQ4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXR4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXS4ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXT4ZA/A' }] },
+          { capacity: '512GB', items: [{ color: '布根地紅色', url: 'https://www.apple.com/hk-zh/xc/product/MJXU4ZA/A' }, { color: '冰川色', url: 'https://www.apple.com/hk-zh/xc/product/MJXV4ZA/A' }, { color: '黑色', url: 'https://www.apple.com/hk-zh/xc/product/MJXW4ZA/A' }, { color: '銀色', url: 'https://www.apple.com/hk-zh/xc/product/MJXX4ZA/A' }] }
         ]
       }
     ];
 
-    const container = document.getElementById('container');
-    let html = '<ion-list>';
-    data.forEach(model => {
-      html += `<ion-item-divider color="light"><ion-label><h2>${model.name}</h2></ion-label></ion-item-divider>`;
+    function renderModel(selectedModelName) {
+      const container = document.getElementById('container');
+      const model = data.find(m => m.name === selectedModelName);
+      if (!model) return;
+
+      let html = `
+        <div class="model-header">
+          <h2>${model.name}</h2>
+        </div>
+      `;
+
       model.capacities.forEach(cap => {
-        html += `<ion-list-header><ion-label>${cap.capacity}</ion-label></ion-list-header>`;
+        html += `
+          <div class="product-card">
+            <div class="capacity-title">${cap.capacity}</div>
+            <ion-list lines="inset">
+        `;
         cap.items.forEach(item => {
+          const hex = colorCodeMap[item.color] || '#ccc';
           html += `
-            <ion-item href="${item.url}" target="_blank" detail="true">
-              <ion-label>
-                <h3>${item.color}</h3>
-                <p>${item.url}</p>
-              </ion-label>
-            </ion-item>`;
+            <ion-item button href="${item.url}" target="_blank" class="item-row" detail="false">
+              <span class="color-dot" style="background-color: ${hex};"></span>
+              <ion-label class="item-label">${item.color}</ion-label>
+              <div slot="end" class="action-btn">開啟 ↗</div>
+            </ion-item>
+          `;
         });
+        html += `
+            </ion-list>
+          </div>
+        `;
       });
+
+      container.innerHTML = html;
+    }
+
+    // 初始化渲染
+    renderModel('iPhone Duo');
+
+    // 監聽 Segment 切換
+    document.getElementById('modelSegment').addEventListener('ionChange', (e) => {
+      renderModel(e.detail.value);
     });
-    html += '</ion-list>';
-    container.innerHTML = html;
   </script>
 </body>
 </html>
