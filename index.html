@@ -90,6 +90,13 @@
       height: 24px;
       margin-left: 8px;
     }
+
+    /* 修復關鍵：確保 <a> 標籤完全覆蓋 ion-item 並且能被 Safari 捕捉為直接點擊 */
+    .direct-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
   </style>
 </head>
 <body>
@@ -216,26 +223,15 @@
       }
     ];
 
-    // 修復「網址無效」問題：透過動態 iframe 喚起 App Scheme，不影響主頁面網址
-    function openApp(partNo) {
+    function triggerVibrate() {
       if (navigator.vibrate) {
         navigator.vibrate(50);
       }
-      
-      const schemeUrl = `apple-store://product/${partNo}`;
-      
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.src = schemeUrl;
-      document.body.appendChild(iframe);
-      
-      setTimeout(() => {
-        document.body.removeChild(iframe);
-      }, 1000);
     }
 
-    // 複製 Part No. 邏輯
+    // 複製 Part No. 邏輯（阻斷冒泡以免觸發連結）
     function copyPartNo(event, partNo) {
+      event.preventDefault();
       event.stopPropagation();
       if (navigator.vibrate) {
         navigator.vibrate([30, 30, 30]);
@@ -268,15 +264,18 @@
         `;
         cap.items.forEach(item => {
           const hex = colorCodeMap[item.color] || '#ccc';
+          const schemeUrl = `apple-store://product/${item.id}`;
           html += `
-            <ion-item button detail="false" onclick="openApp('${item.id}')">
-              <span class="color-dot" style="background-color: ${hex};"></span>
-              <ion-label style="font-weight: 600;">${item.color}</ion-label>
-              <ion-chip class="copy-chip" outline color="medium" onclick="copyPartNo(event, '${item.id}')">
-                複製代碼
-              </ion-chip>
-              <div slot="end" style="color: #007aff; font-size: 13px; font-weight: 700;">進入 App ⚡</div>
-            </ion-item>
+            <a href="${schemeUrl}" class="direct-link" onclick="triggerVibrate()">
+              <ion-item button="false" detail="false">
+                <span class="color-dot" style="background-color: ${hex};"></span>
+                <ion-label style="font-weight: 600;">${item.color}</ion-label>
+                <ion-chip class="copy-chip" outline color="medium" onclick="copyPartNo(event, '${item.id}')">
+                  複製代碼
+                </ion-chip>
+                <div slot="end" style="color: #007aff; font-size: 13px; font-weight: 700;">進入 App ⚡</div>
+              </ion-item>
+            </a>
           `;
         });
         html += `
