@@ -265,9 +265,10 @@
         `;
         cap.items.forEach(item => {
           const hex = colorCodeMap[item.color] || '#ccc';
-          const schemeUrl = `apple-store://product/${item.id}`;
+          // 使用 Apple 官方 Universal Link 帶入產品代碼，確保 iOS 系統自動喚起 Apple Store App
+          const universalUrl = `https://www.apple.com/hk-zh/shop/product/${item.id}`;
           html += `
-            <a href="${schemeUrl}" class="app-link" onclick="triggerVibrate()">
+            <a href="${universalUrl}" class="app-link" onclick="triggerVibrate()">
               <ion-item button detail="false">
                 <span class="color-dot" style="background-color: ${hex};"></span>
                 <ion-label style="font-weight: 600;">${item.color}</ion-label>
