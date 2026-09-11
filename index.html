@@ -91,7 +91,6 @@
       margin-left: 8px;
     }
 
-    /* 修復關鍵：確保 <a> 標籤完全覆蓋 ion-item 並且能被 Safari 捕捉為直接點擊 */
     .direct-link {
       display: block;
       text-decoration: none;
@@ -166,7 +165,7 @@
             capacity: '256GB',
             price: 'HK$ 10,499',
             items: [
-              { color: '布根地紅色', id: 'MJXA4ZA/A' },
+              { color: '布根地紅色', id: 'MJRR4ZA/A' },
               { color: '冰川色', id: 'MJXB4ZA/A' },
               { color: '黑色', id: 'MJXC4ZA/A' },
               { color: '銀色', id: 'MJXD4ZA/A' }
@@ -229,7 +228,6 @@
       }
     }
 
-    // 複製 Part No. 邏輯（阻斷冒泡以免觸發連結）
     function copyPartNo(event, partNo) {
       event.preventDefault();
       event.stopPropagation();
@@ -241,7 +239,6 @@
       });
     }
 
-    // 渲染畫面
     function renderModel(selectedModelName) {
       const container = document.getElementById('container');
       const model = data.find(m => m.name === selectedModelName);
@@ -264,9 +261,10 @@
         `;
         cap.items.forEach(item => {
           const hex = colorCodeMap[item.color] || '#ccc';
-          const schemeUrl = `apple-store://product/${item.id}`;
+          // 改用 iOS 系統原生的 Apple Store Universal Link 格式 (/xc/product/)
+          const universalUrl = `https://www.apple.com/hk-zh/xc/product/${item.id}`;
           html += `
-            <a href="${schemeUrl}" class="direct-link" onclick="triggerVibrate()">
+            <a href="${universalUrl}" class="direct-link" onclick="triggerVibrate()">
               <ion-item button="false" detail="false">
                 <span class="color-dot" style="background-color: ${hex};"></span>
                 <ion-label style="font-weight: 600;">${item.color}</ion-label>
@@ -287,10 +285,8 @@
       container.innerHTML = html;
     }
 
-    // 預設載入 iPhone 18 Pro Max
     renderModel('iPhone 18 Pro Max');
 
-    // 切換 Segment 監聽
     document.getElementById('modelSegment').addEventListener('ionChange', (e) => {
       renderModel(e.detail.value);
     });
