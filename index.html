@@ -216,12 +216,22 @@
       }
     ];
 
-    // 開啟 Apple Store App 原始方法
+    // 修復「網址無效」問題：透過動態 iframe 喚起 App Scheme，不影響主頁面網址
     function openApp(partNo) {
       if (navigator.vibrate) {
         navigator.vibrate(50);
       }
-      window.location.href = `apple-store://product/${partNo}`;
+      
+      const schemeUrl = `apple-store://product/${partNo}`;
+      
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = schemeUrl;
+      document.body.appendChild(iframe);
+      
+      setTimeout(() => {
+        document.body.removeChild(iframe);
+      }, 1000);
     }
 
     // 複製 Part No. 邏輯
