@@ -90,13 +90,6 @@
       height: 24px;
       margin-left: 8px;
     }
-
-    .app-link {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      width: 100%;
-    }
   </style>
 </head>
 <body>
@@ -223,16 +216,16 @@
       }
     ];
 
-    // 觸覺回饋
-    function triggerVibrate() {
+    // 開啟 Apple Store App 原始方法
+    function openApp(partNo) {
       if (navigator.vibrate) {
         navigator.vibrate(50);
       }
+      window.location.href = `apple-store://product/${partNo}`;
     }
 
     // 複製 Part No. 邏輯
     function copyPartNo(event, partNo) {
-      event.preventDefault();
       event.stopPropagation();
       if (navigator.vibrate) {
         navigator.vibrate([30, 30, 30]);
@@ -265,19 +258,15 @@
         `;
         cap.items.forEach(item => {
           const hex = colorCodeMap[item.color] || '#ccc';
-          // 使用 Apple 官方 Universal Link 帶入產品代碼，確保 iOS 系統自動喚起 Apple Store App
-          const universalUrl = `https://www.apple.com/hk-zh/shop/product/${item.id}`;
           html += `
-            <a href="${universalUrl}" class="app-link" onclick="triggerVibrate()">
-              <ion-item button detail="false">
-                <span class="color-dot" style="background-color: ${hex};"></span>
-                <ion-label style="font-weight: 600;">${item.color}</ion-label>
-                <ion-chip class="copy-chip" outline color="medium" onclick="copyPartNo(event, '${item.id}')">
-                  複製代碼
-                </ion-chip>
-                <div slot="end" style="color: #007aff; font-size: 13px; font-weight: 700;">進入 App ⚡</div>
-              </ion-item>
-            </a>
+            <ion-item button detail="false" onclick="openApp('${item.id}')">
+              <span class="color-dot" style="background-color: ${hex};"></span>
+              <ion-label style="font-weight: 600;">${item.color}</ion-label>
+              <ion-chip class="copy-chip" outline color="medium" onclick="copyPartNo(event, '${item.id}')">
+                複製代碼
+              </ion-chip>
+              <div slot="end" style="color: #007aff; font-size: 13px; font-weight: 700;">進入 App ⚡</div>
+            </ion-item>
           `;
         });
         html += `
